@@ -13,6 +13,11 @@
   transform: translateY(-5px);
 }
 
+.book-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .book-image {
   position: relative;
 }
@@ -56,6 +61,7 @@
   margin-left: 5px;
 }
 
+/* Position the action buttons below the card content */
 .action-buttons {
   display: flex;
   gap: 10px;
