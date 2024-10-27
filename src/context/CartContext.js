@@ -26,7 +26,10 @@ function cartReducer(state, action) {
       return {
         ...state,
         items: updatedItems,
-        itemCount: state.itemCount + 1,
+        itemCount: updatedItems.reduce(
+          (total, item) => total + item.quantity,
+          0
+        ), // Calculate itemCount based on quantity
       };
 
     case "INCREMENT_QUANTITY":
@@ -38,7 +41,10 @@ function cartReducer(state, action) {
       return {
         ...state,
         items: updatedItems,
-        itemCount: state.itemCount + 1,
+        itemCount: updatedItems.reduce(
+          (total, item) => total + item.quantity,
+          0
+        ), // Recalculate itemCount
       };
 
     case "DECREMENT_QUANTITY":
@@ -47,14 +53,13 @@ function cartReducer(state, action) {
           ? { ...item, quantity: item.quantity - 1 }
           : item
       );
-      const decrementedItemCount =
-        state.items.find((item) => item.id === action.payload).quantity > 1
-          ? state.itemCount - 1
-          : state.itemCount;
       return {
         ...state,
         items: updatedItems,
-        itemCount: decrementedItemCount,
+        itemCount: updatedItems.reduce(
+          (total, item) => total + item.quantity,
+          0
+        ), // Recalculate itemCount
       };
 
     case "SET_CART":

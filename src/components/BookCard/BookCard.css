@@ -1,0 +1,64 @@
+/* src/components/BookCard/BookCard.css */
+
+.book-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+  transition: transform 0.3s;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+}
+
+.book-image {
+  position: relative;
+}
+
+.book-image img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #f5a623;
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.book-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.book-author {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.book-price {
+  color: #f5a623;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-left: 5px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
