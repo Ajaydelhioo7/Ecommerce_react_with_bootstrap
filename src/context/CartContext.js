@@ -29,7 +29,7 @@ function cartReducer(state, action) {
         itemCount: updatedItems.reduce(
           (total, item) => total + item.quantity,
           0
-        ), // Calculate itemCount based on quantity
+        ),
       };
 
     case "INCREMENT_QUANTITY":
@@ -44,7 +44,7 @@ function cartReducer(state, action) {
         itemCount: updatedItems.reduce(
           (total, item) => total + item.quantity,
           0
-        ), // Recalculate itemCount
+        ),
       };
 
     case "DECREMENT_QUANTITY":
@@ -59,7 +59,18 @@ function cartReducer(state, action) {
         itemCount: updatedItems.reduce(
           (total, item) => total + item.quantity,
           0
-        ), // Recalculate itemCount
+        ),
+      };
+
+    case "REMOVE_FROM_CART":
+      updatedItems = state.items.filter((item) => item.id !== action.payload);
+      return {
+        ...state,
+        items: updatedItems,
+        itemCount: updatedItems.reduce(
+          (total, item) => total + item.quantity,
+          0
+        ),
       };
 
     case "SET_CART":
@@ -98,9 +109,19 @@ export function CartProvider({ children }) {
     dispatch({ type: "DECREMENT_QUANTITY", payload: productId });
   };
 
+  const removeFromCart = (productId) => {
+    dispatch({ type: "REMOVE_FROM_CART", payload: productId });
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart: state, addToCart, incrementQuantity, decrementQuantity }}
+      value={{
+        cart: state,
+        addToCart,
+        incrementQuantity,
+        decrementQuantity,
+        removeFromCart,
+      }}
     >
       {children}
     </CartContext.Provider>

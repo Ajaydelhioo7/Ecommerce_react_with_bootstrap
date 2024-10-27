@@ -1,16 +1,29 @@
 import React from "react";
 import { useCart } from "../../../context/CartContext";
 import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./CartDrawer.css";
 
 const CartDrawer = ({ isOpen, toggleCart }) => {
-  const { cart, incrementQuantity, decrementQuantity } = useCart();
+  const { cart, incrementQuantity, decrementQuantity, removeFromCart } =
+    useCart();
+  const navigate = useNavigate(); // Initialize navigate function
 
   const calculateSubtotal = () => {
     return cart.items.reduce(
       (acc, item) => acc + item.price * item.quantity,
       0
     );
+  };
+
+  const handleViewCart = () => {
+    toggleCart(); // Close the drawer
+    navigate("/cart"); // Navigate to Cart page
+  };
+
+  const handleCheckout = () => {
+    toggleCart(); // Close the drawer
+    navigate("/checkout"); // Navigate to Checkout page
   };
 
   return (
@@ -29,6 +42,12 @@ const CartDrawer = ({ isOpen, toggleCart }) => {
         <div className="cart-items">
           {cart.items.map((item, index) => (
             <div key={index} className="cart-item">
+              <button
+                className="remove-item"
+                onClick={() => removeFromCart(item.id)}
+              >
+                &times;
+              </button>
               <img
                 src={item.image}
                 alt={item.title}
@@ -64,10 +83,18 @@ const CartDrawer = ({ isOpen, toggleCart }) => {
               <p>₹ {calculateSubtotal()}</p>
             </div>
             <Form.Check type="checkbox" label="Pay Via Gift Cards" />
-            <Button variant="warning" className="checkout-button">
+            <Button
+              variant="warning"
+              className="checkout-button"
+              onClick={handleCheckout}
+            >
               CHECK OUT
             </Button>
-            <Button variant="link" className="view-cart-button">
+            <Button
+              variant="link"
+              className="view-cart-button"
+              onClick={handleViewCart}
+            >
               VIEW CART
             </Button>
           </div>

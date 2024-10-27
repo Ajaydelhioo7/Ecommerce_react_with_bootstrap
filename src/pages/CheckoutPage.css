@@ -1,0 +1,43 @@
+/* src/pages/CheckoutPage.css */
+
+.checkout-page {
+  padding: 40px 0;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.order-summary {
+  margin-bottom: 30px;
+}
+
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 10px 0;
+}
+
+.shipping-info {
+  margin-top: 20px;
+}
+
+.place-order-button {
+  background-color: #f5a623;
+  color: white;
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  font-size: 1rem;
+}

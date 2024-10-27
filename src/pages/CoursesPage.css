@@ -1,0 +1,33 @@
+.courses-page {
+  padding: 40px 0;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.courses-page {
+  padding: 40px 0;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.course-tabs {
+  margin-bottom: 20px;
+}
+
+.course-tabs .nav-link {
+  color: #555;
+  font-weight: bold;
+}
+
+.course-tabs .nav-link.active {
+  color: #fff;
+  background-color: #f5a623;
+  border-color: #f5a623;
+}
