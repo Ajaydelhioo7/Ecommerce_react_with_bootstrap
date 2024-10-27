@@ -1,0 +1,189 @@
+/* src/components/common/Header/Header.css */
+
+/* Top bar with promotional text */
+.header-top {
+  background-color: #f5a623;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 0.9rem;
+}
+
+/* Main navigation container */
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+
+/* Logo styling */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  margin-left: 5px;
+  font-family: "Kaisei Tokumin", sans-serif; /* Apply the Kaisei Tokumin font */
+}
+
+/* Search bar styling */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #f9f1ed;
+  border-radius: 20px;
+  padding: 5px 10px;
+  width: 300px;
+}
+
+.search-bar input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  padding: 5px;
+  font-family: inherit;
+}
+
+.search-bar button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  font-size: 1rem;
+}
+
+/* Desktop Navigation Links */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+}
+
+/* User action icons */
+.user-actions {
+  display: flex;
+  gap: 15px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Hamburger icon for mobile */
+.hamburger-icon {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Slide-in mobile menu styles */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Hidden by default */
+  height: 100vh;
+  width: 70%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease; /* Smooth slide-in transition */
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px; /* Space for header */
+}
+
+.mobile-menu.open {
+  right: 0; /* Slide in from the right */
+}
+
+.mobile-menu nav {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.mobile-menu a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Close icon inside mobile menu */
+.close-menu-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  /* Hide desktop nav-links */
+  .nav-links {
+    display: none;
+  }
+
+  /* Show hamburger icon */
+  .hamburger-icon {
+    display: block;
+  }
+
+  /* Adjust logo size and layout for mobile */
+  .logo h1 {
+    font-size: 1.2rem;
+  }
+
+  /* Make search bar full width on mobile */
+  .search-bar {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  /* Center the user actions */
+  .user-actions {
+    gap: 10px;
+    font-size: 1.3rem;
+  }
+}
+.logo img {
+  height: 55px;
+  width: 140px;
+}
+/* src/components/common/Header/Header.css */
+
+.cart-icon-container {
+  position: relative;
+  display: inline-block;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #f5a623;
+  color: white;
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+}

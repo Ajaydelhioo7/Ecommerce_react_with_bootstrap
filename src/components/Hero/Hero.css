@@ -1,0 +1,41 @@
+/* src/components/Hero/Hero.css */
+
+.hero-section {
+  padding: 50px 0;
+  background-color: #f9f9f9;
+}
+
+.hero-left h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero-left p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.hero-search {
+  display: flex;
+  gap: 10px;
+}
+
+.search-input {
+  flex: 1;
+}
+
+.search-button {
+  padding: 10px 20px;
+  font-weight: 500;
+}
+
+.hero-carousel .carousel-item img {
+  border-radius: 8px;
+}
+.imgcar {
+  height: 300px;
+  width: 100px;
+}
