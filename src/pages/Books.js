@@ -1,4 +1,3 @@
-// src/pages/Books.js
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import BookCard from "../components/BookCard/BookCard";

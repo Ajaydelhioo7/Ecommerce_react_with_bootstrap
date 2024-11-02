@@ -1,19 +1,9 @@
 import React from "react";
-// import { useCart } from "../context/CartContext";
 import { Container, Form, Button } from "react-bootstrap";
 import logo from "../assets/images/99notes.webp";
 import "./CheckoutPage.css";
 
 const CheckoutPage = () => {
-  // const { cart } = useCart();
-
-  // const calculateSubtotal = () => {
-  //   return cart.items.reduce(
-  //     (acc, item) => acc + item.price * item.quantity,
-  //     0
-  //   );
-  // };
-
   return (
     <Container className="checkout-page">
       {/* Logo at the top */}

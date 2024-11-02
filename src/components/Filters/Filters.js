@@ -1,4 +1,3 @@
-// src/components/Filters/Filters.js
 import React from "react";
 import "./Filters.css";
 

@@ -1,4 +1,3 @@
-// src/components/Hero/Hero.js
 import React from "react";
 import "./Hero.css";
 import { Carousel, Container, Row, Col, Button, Form } from "react-bootstrap";

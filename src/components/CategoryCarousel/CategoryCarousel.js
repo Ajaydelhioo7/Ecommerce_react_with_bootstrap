@@ -1,4 +1,3 @@
-// src/components/CategoryCarousel/CategoryCarousel.js
 import React from "react";
 import "./CategoryCarousel.css";
 import { Card } from "react-bootstrap";
