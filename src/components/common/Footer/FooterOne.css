@@ -1,0 +1,82 @@
+/* src/components/common/FooterOne.css */
+
+.footer-one {
+  background-color: #f8ebe7;
+  color: #333;
+  padding: 40px 0;
+  font-size: 0.9rem;
+}
+
+.footer-one h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.footer-one p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.footer-subscribe-form .email-input-wrapper {
+  display: flex;
+  border: 1px solid #333;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.footer-subscribe-form input[type="email"] {
+  border: none;
+  padding: 8px;
+  flex-grow: 1;
+}
+
+.footer-subscribe-form button {
+  background: none;
+  border: none;
+  color: #333;
+  padding: 8px;
+  font-size: 1rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #666;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.social-icons a {
+  color: #333;
+  font-size: 1.2rem;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #f5a623;
+}
+
+.footer-bottom {
+  background-color: #f5a623;
+  text-align: center;
+  padding: 10px 0;
+  color: #fff;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 0.9rem;
+}

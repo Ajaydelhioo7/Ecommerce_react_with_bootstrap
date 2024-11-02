@@ -2,42 +2,98 @@
 
 .checkout-page {
   padding: 40px 0;
+  color: #333;
+  font-size: 0.9rem;
 }
 
-.page-title {
-  font-size: 2rem;
+.checkout-logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.checkout-logo img {
+  width: 120px;
+}
+
+.checkout-title {
+  text-align: center;
+  font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-.order-summary {
-  margin-bottom: 30px;
-}
-
-.checkout-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
-}
-
-.order-total {
-  display: flex;
-  justify-content: space-between;
+.section-title {
+  font-size: 1.1rem;
   font-weight: bold;
-  font-size: 1.2rem;
-  padding: 10px 0;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.shipping-info {
+.address-form-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f8ebe7;
+}
+
+.address-form h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.autofill-button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background-color: #f0ece9;
+  color: #333;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  border: none;
+}
+
+.autofill-button:hover {
+  background-color: #e5ddd8;
+}
+
+.address-form .form-group {
+  margin-bottom: 15px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
   margin-top: 20px;
 }
 
-.place-order-button {
+.back-button {
+  background-color: #ddd;
+  color: #333;
+  border: none;
+}
+
+.back-button:hover {
+  background-color: #ccc;
+}
+
+.next-button {
   background-color: #f5a623;
   color: white;
-  margin-top: 15px;
-  padding: 10px 20px;
   border: none;
-  font-size: 1rem;
+}
+
+.next-button:hover {
+  background-color: #e59920;
+}
+
+.address-form .form-check-label {
+  color: #666;
+  font-size: 0.85rem;
+}
+.checkout-logo {
+  background-color: #f8ebe7;
+  padding: 15px;
 }

@@ -1,66 +1,93 @@
 import React from "react";
-import { useCart } from "../context/CartContext";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+// import { useCart } from "../context/CartContext";
+import { Container, Form, Button } from "react-bootstrap";
+import logo from "../assets/images/99notes.webp";
 import "./CheckoutPage.css";
 
 const CheckoutPage = () => {
-  const { cart } = useCart();
+  // const { cart } = useCart();
 
-  const calculateSubtotal = () => {
-    return cart.items.reduce(
-      (acc, item) => acc + item.price * item.quantity,
-      0
-    );
-  };
+  // const calculateSubtotal = () => {
+  //   return cart.items.reduce(
+  //     (acc, item) => acc + item.price * item.quantity,
+  //     0
+  //   );
+  // };
 
   return (
     <Container className="checkout-page">
-      <h2 className="page-title">Checkout</h2>
-
-      {/* Order Summary */}
-      <div className="order-summary">
-        <h4>Order Summary</h4>
-        {cart.items.map((item) => (
-          <div key={item.id} className="checkout-item">
-            <p>
-              {item.title} x {item.quantity}
-            </p>
-            <p>₹ {item.price * item.quantity}</p>
-          </div>
-        ))}
-        <div className="order-total">
-          <p>Subtotal</p>
-          <p>₹ {calculateSubtotal()}</p>
-        </div>
+      {/* Logo at the top */}
+      <div className="checkout-logo">
+        <img src={logo} alt="99Notes Logo" />
       </div>
 
-      {/* Shipping Information */}
-      <Form className="shipping-info">
-        <h4>Shipping Information</h4>
-        <Form.Group>
-          <Form.Label>Full Name</Form.Label>
-          <Form.Control type="text" required />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Address</Form.Label>
-          <Form.Control type="text" required />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>City</Form.Label>
-          <Form.Control type="text" required />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Postal Code</Form.Label>
-          <Form.Control type="text" required />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Phone Number</Form.Label>
-          <Form.Control type="text" required />
-        </Form.Group>
-        <Button variant="primary" type="submit" className="place-order-button">
-          Place Order
-        </Button>
-      </Form>
+      <h2 className="checkout-title">Checkout</h2>
+      <h3 className="section-title">1 Enter a new shipping address</h3>
+
+      <div className="address-form-wrapper">
+        <Form className="address-form">
+          <h4>Add a new address</h4>
+          <Button variant="outline-secondary" className="autofill-button">
+            Save time. Autofill your current location.
+          </Button>
+
+          <Form.Group>
+            <Form.Label>Country/Region</Form.Label>
+            <Form.Control type="text" required />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Receiver Name (First and Last name)</Form.Label>
+            <Form.Control type="text" required />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Street Number</Form.Label>
+            <Form.Control type="text" required />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Locality</Form.Label>
+            <Form.Control type="text" required />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>City</Form.Label>
+            <Form.Control type="text" required />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>State / Province / Region</Form.Label>
+            <Form.Control type="text" required />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>PIN Code</Form.Label>
+            <Form.Control type="text" required />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Phone Number</Form.Label>
+            <Form.Control type="text" required />
+            <Form.Text className="text-muted">
+              May be used to assist delivery
+            </Form.Text>
+          </Form.Group>
+
+          <Form.Group controlId="defaultAddressCheckbox">
+            <Form.Check type="checkbox" label="Use as my default address." />
+          </Form.Group>
+
+          <div className="form-buttons">
+            <Button variant="outline-secondary" className="back-button">
+              Back
+            </Button>
+            <Button variant="warning" className="next-button">
+              Use this address
+            </Button>
+          </div>
+        </Form>
+      </div>
     </Container>
   );
 };
