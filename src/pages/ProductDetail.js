@@ -7,7 +7,6 @@ import {
   Button,
   Form,
   Accordion,
-  Card,
   Tabs,
   Tab,
 } from "react-bootstrap";

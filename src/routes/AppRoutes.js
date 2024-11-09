@@ -8,6 +8,7 @@ import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import FooterOne from "../components/common/Footer/FooterOne";
 import FooterTwo from "../components/common/Footer/FooterTwo";
+import TestSeriesPage from "../pages/TestSeriesPage";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -24,6 +25,7 @@ const AppRoutes = () => {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<CartPage />} /> {/* Cart page */}
         <Route path="/checkout" element={<CheckoutPage />} />{" "}
+        <Route path="/test-series" element={<TestSeriesPage />} />
         {/* Checkout page */}
       </Routes>
 
