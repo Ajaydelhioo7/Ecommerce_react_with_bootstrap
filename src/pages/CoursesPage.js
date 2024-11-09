@@ -107,7 +107,7 @@ const CoursesPage = () => {
 
   return (
     <Container className="courses-page">
-      <h2 className="page-title">Our Courses</h2>
+      <h2 className="page-title mt-3">Our Courses</h2>
 
       {/* Top Filter Tabs for Course Type */}
       <Tabs
