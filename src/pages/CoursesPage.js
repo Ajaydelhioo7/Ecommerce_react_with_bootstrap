@@ -4,69 +4,72 @@ import CourseCard from "../components/CourseCard/CourseCard";
 import CourseFilters from "../components/Filters/CourseFilters";
 import "./CoursesPage.css";
 
-// Sample course data, each with a category matching one of the tab labels
-const coursesData = [
+// Updated course data with courseType, subject, exam, and category added
+const courseData = [
   {
     id: 1,
-    title: "Polity - GS Foundation Course",
+    title: "Polity - Subjectwise GS Programme",
     fee: 168500,
-    image: "https://via.placeholder.com/200",
+    medium: "English",
     duration: "11 Months",
-    timing: "01:00 PM to 07:30 PM",
+    classTiming: "01:00 PM to 07:30 PM",
+    courseType: "GS Pre-Foundations",
     subject: "Polity",
     exam: "UPSC",
-    category: "GS Pre-Foundations",
+    category: "Text Book",
+    image: "https://via.placeholder.com/200",
   },
   {
     id: 2,
-    title: "History - GS Foundation Course",
+    title: "History - Subjectwise GS Programme",
     fee: 142000,
-    image: "https://via.placeholder.com/200",
+    medium: "Hindi",
     duration: "11 Months",
-    timing: "01:00 PM to 07:30 PM",
+    classTiming: "01:00 PM to 07:30 PM",
+    courseType: "Optional Course",
     subject: "History",
-    exam: "UPSC",
-    category: "Online Live Course",
+    exam: "State PSC",
+    category: "Objective Paper",
+    image: "https://via.placeholder.com/200",
   },
   {
     id: 3,
-    title: "Indian Economy - GS Foundation Course",
-    fee: 168500,
-    image: "https://via.placeholder.com/200",
+    title: "Economics - Subjectwise GS Programme",
+    fee: 142000,
+    medium: "Hindi",
     duration: "11 Months",
-    timing: "01:00 PM to 07:30 PM",
-    subject: "Economy",
-    exam: "SSC",
-    category: "Weekend Course",
+    classTiming: "01:00 PM to 07:30 PM",
+    courseType: "Online Live Course",
+    subject: "Economic",
+    exam: "Banking",
+    category: "Objective Paper",
+    image: "https://via.placeholder.com/200",
   },
   {
     id: 4,
-    title: "Science & Technology - GS Foundation Course",
-    fee: 168500,
-    image: "https://via.placeholder.com/200",
+    title: "Geography - Subjectwise GS Programme",
+    fee: 142000,
+    medium: "Hindi",
     duration: "11 Months",
-    timing: "01:00 PM to 07:30 PM",
-    subject: "Science",
-    exam: "Banking",
-    category: "Classroom Courses",
+    classTiming: "01:00 PM to 07:30 PM",
+    courseType: "Optional Course",
+    subject: "Geography",
+    exam: "SSC",
+    category: "Objective Paper",
+    image: "https://via.placeholder.com/200",
   },
-  // Add more courses as needed
+  // Add more course data as needed
 ];
 
+// Filter options
 const filterOptions = {
-  subjects: ["History", "Economy", "Polity", "Science"],
+  subjects: ["History", "Economic", "Polity", "Geography"],
   exams: ["UPSC", "SSC", "State PSC", "Banking"],
-  categories: [
-    "GS Pre-Foundations",
-    "Online Live Course",
-    "Weekend Course",
-    "Optional Course",
-    "Classroom Courses",
-  ],
+  categories: ["Text Book", "Objective Paper", "PYQ", "Answer Writing"],
 };
 
 const CoursesPage = () => {
-  const [selectedTab, setSelectedTab] = useState("GS Pre-Foundations");
+  const [selectedTab, setSelectedTab] = useState("All Courses");
   const [filters, setFilters] = useState({
     ...filterOptions,
     selectedSubjects: [],
@@ -83,34 +86,44 @@ const CoursesPage = () => {
     }));
   };
 
-  // Filter courses based on selected tab and filters
-  const filteredCourses = coursesData.filter((course) => {
-    return (
-      course.category === selectedTab &&
-      (filters.selectedSubjects.length === 0 ||
-        filters.selectedSubjects.includes(course.subject)) &&
-      (filters.selectedExams.length === 0 ||
-        filters.selectedExams.includes(course.exam))
-    );
+  const filteredCourses = courseData.filter((course) => {
+    const isSubjectMatch =
+      !filters.selectedSubjects.length ||
+      filters.selectedSubjects.includes(course.subject);
+
+    const isExamMatch =
+      !filters.selectedExams.length ||
+      filters.selectedExams.includes(course.exam);
+
+    const isCategoryMatch =
+      !filters.selectedCategories.length ||
+      filters.selectedCategories.includes(course.category);
+
+    const isTabMatch =
+      selectedTab === "All Courses" || course.courseType === selectedTab;
+
+    return isSubjectMatch && isExamMatch && isCategoryMatch && isTabMatch;
   });
 
   return (
-    <Container className="courses-page p-5">
+    <Container className="courses-page">
       <h2 className="page-title">Our Courses</h2>
 
-      {/* Course Category Tabs */}
+      {/* Top Filter Tabs for Course Type */}
       <Tabs
         activeKey={selectedTab}
         onSelect={(tab) => setSelectedTab(tab)}
-        className="course-tabs p-5"
+        className="course-tabs p-3"
       >
-        {filterOptions.categories.map((category) => (
-          <Tab eventKey={category} title={category} key={category} />
-        ))}
+        <Tab eventKey="All Courses" title="All Courses" />
+        <Tab eventKey="GS Pre-Foundations" title="GS Pre-Foundations" />
+        <Tab eventKey="Online Live Course" title="Online Live Course" />
+        <Tab eventKey="Weekend Course" title="Weekend Course" />
+        <Tab eventKey="Optional Course" title="Optional Course" />
+        <Tab eventKey="Classroom Courses" title="Classroom Courses" />
       </Tabs>
 
       <Row>
-        {/* Sidebar Filters */}
         <Col md={3}>
           <CourseFilters
             filters={filters}
@@ -118,7 +131,6 @@ const CoursesPage = () => {
           />
         </Col>
 
-        {/* Course Grid */}
         <Col md={9}>
           <Row>
             {filteredCourses.map((course) => (

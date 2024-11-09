@@ -1,4 +1,4 @@
-.courses-page {
+/* .courses-page {
   padding: 40px 0;
 }
 
@@ -24,10 +24,32 @@
 .course-tabs .nav-link {
   color: #555;
   font-weight: bold;
-}
+} */
 
 .course-tabs .nav-link.active {
   color: #fff;
   background-color: #f5a623;
   border-color: #f5a623;
+}
+.course-tabs .nav-tabs {
+  justify-content: center;
+  border-bottom: none;
+  margin-bottom: 20px;
+}
+
+.course-tabs .nav-link {
+  background-color: #f8ebe7;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin: 0 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  border: 1px solid transparent;
+}
+
+.course-tabs .nav-link.active {
+  background-color: #f5a623;
+  color: #fff;
+  border: 1px solid #ddd;
 }

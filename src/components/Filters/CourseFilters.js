@@ -10,7 +10,6 @@ const CourseFilters = ({ filters, onFilterChange }) => {
     <div className="course-filters">
       <h4>Filter by</h4>
 
-      {/* Filter by Subject */}
       <div className="filter-category">
         <h5>Subject</h5>
         {filters.subjects.map((subject) => (
@@ -23,12 +22,8 @@ const CourseFilters = ({ filters, onFilterChange }) => {
             {subject}
           </label>
         ))}
-        <a href="#show-more" className="show-more">
-          Show More
-        </a>
       </div>
 
-      {/* Filter by Exam */}
       <div className="filter-category">
         <h5>Exam</h5>
         {filters.exams.map((exam) => (
@@ -41,12 +36,8 @@ const CourseFilters = ({ filters, onFilterChange }) => {
             {exam}
           </label>
         ))}
-        <a href="#show-more" className="show-more">
-          Show More
-        </a>
       </div>
 
-      {/* Filter by Category */}
       <div className="filter-category">
         <h5>Category</h5>
         {filters.categories.map((category) => (
@@ -61,9 +52,6 @@ const CourseFilters = ({ filters, onFilterChange }) => {
             {category}
           </label>
         ))}
-        <a href="#show-more" className="show-more">
-          Show More
-        </a>
       </div>
     </div>
   );
