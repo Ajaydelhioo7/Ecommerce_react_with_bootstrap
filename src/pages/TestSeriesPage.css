@@ -1,0 +1,155 @@
+.test-series-page {
+  padding: 40px 20px;
+  color: #333;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Tabs Styling */
+.test-series-tabs .nav-tabs {
+  justify-content: center;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.test-series-tabs .nav-link {
+  background-color: #f8ebe7;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin: 0 5px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.test-series-tabs .nav-link.active {
+  background-color: #f5a623;
+  color: #fff;
+}
+
+/* Filter Section Styling */
+.test-series-filters {
+  background-color: #f8ebe7;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.test-series-filters h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.filter-category {
+  margin-bottom: 20px;
+}
+
+.filter-category h5 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.filter-category label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.filter-category label input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Test Series Card Styling */
+.test-series-card {
+  background-color: #f8ebe7;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  transition: transform 0.2s ease;
+}
+
+.test-series-card:hover {
+  transform: translateY(-5px);
+}
+
+.test-series-image img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.test-series-details {
+  flex-grow: 1;
+}
+
+.test-series-details h4 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.test-series-details p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.test-series-details p:last-child {
+  font-weight: bold;
+}
+
+.buy-now {
+  background-color: #f5a623;
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.buy-now:hover {
+  background-color: #e59920;
+}
+.test-series-tabs .nav-tabs {
+  justify-content: center;
+  border-bottom: none;
+  margin-bottom: 20px;
+}
+
+.test-series-tabs .nav-link {
+  background-color: #f8ebe7;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin: 0 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  border: 1px solid transparent;
+}
+
+.test-series-tabs .nav-link.active {
+  background-color: #f5a623;
+  color: #fff;
+  border: 1px solid #ddd;
+}
