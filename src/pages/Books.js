@@ -3,13 +3,17 @@ import { Container, Row, Col } from "react-bootstrap";
 import BookCard from "../components/BookCard/BookCard";
 import Filters from "../components/Filters/Filters";
 import "./Books.css";
-import axios from "axios";
+//import axios from "axios";
+import axiosInstance from "../services/axiosInstance";
 
 const filtersData = {
   subjects: ["History", "Economic", "Polity", "Geography"],
   exams: ["UPSC", "SSC", "State PSC", "Banking"],
   categories: ["Text Book", "Objective Paper", "PYQ", "Answer Writing"],
 };
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+console.log(API_BASE_URL);
 
 const Books = () => {
   const [booksData, setBooksData] = useState([]); // Holds books fetched from the API
@@ -24,7 +28,9 @@ const Books = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/products");
+        const response = await axiosInstance.get("/products",{
+          withCredentials: true,
+        });
         const transformedBooks = response.data.map((item) => ({
           id: item.id,
           title: item.name,
@@ -32,7 +38,7 @@ const Books = () => {
           price: item.price,
           originalPrice: JSON.parse(item.description).originalPrice,
           discount: JSON.parse(item.description).discount,
-          image: item.imageUrl,
+          image: `${API_BASE_URL}${item.imageUrl}`,
           subject: JSON.parse(item.description).subject,
           exam: "N/A", // Default value; adjust if API provides exam data
           category: mapCategory(item.category),

@@ -29,8 +29,12 @@ const Login = () => {
         {
           phoneNumber,
           otp,
+        },
+        {
+          withCredentials: true, 
         }
       );
+      
       alert(response.data);
       navigate("/checkout");
     } catch (error) {
