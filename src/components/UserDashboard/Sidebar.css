@@ -1,0 +1,41 @@
+.sidebar {
+  width: 250px;
+  background: #fff;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+}
+
+.sidebar .profile-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.profile-info h3 {
+  margin: 0;
+}
+
+.sidebar-nav button {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.sidebar-nav button.active {
+  font-weight: bold;
+}
+
+.sidebar-footer button {
+  display: block;
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background: #f9f9f9;
+  border: none;
+  cursor: pointer;
+}

@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Homepage from "../pages/Homepage";
 import ProductDetail from "../pages/ProductDetail";
 import Books from "../pages/Books";
+import Account from "../pages/Account"; // Account page
 import CoursesPage from "../pages/CoursesPage";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
@@ -30,6 +31,7 @@ const AppRoutes = () => {
         <Route path="/test-series" element={<TestSeriesPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/account" element={<Account />} />
         {/* Checkout page */}
       </Routes>
 

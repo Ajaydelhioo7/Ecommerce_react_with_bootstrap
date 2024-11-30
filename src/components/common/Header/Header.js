@@ -1,5 +1,6 @@
 import logo from "../../../assets/images/99notes.webp";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import {
   FaUser,
@@ -34,9 +35,9 @@ const Header = () => {
 
       {/* Main navigation bar */}
       <div className="header-main">
-        <div className="logo">
-          <img src={logo} alt="Logo" className="logo-icon" />{" "}
-        </div>
+        <Link to="/" class="logo">
+          <img src={logo} alt="Logo" className="logo-icon" />
+        </Link>
 
         {/* Search bar */}
         <div className="search-bar">
@@ -56,7 +57,9 @@ const Header = () => {
 
         {/* User action icons */}
         <div className="user-actions">
-          <FaUser />
+          <Link to="/account">
+            <FaUser />
+          </Link>
           <FaHeart />
           <div className="cart-icon-container" onClick={toggleCart}>
             <FaShoppingBag />

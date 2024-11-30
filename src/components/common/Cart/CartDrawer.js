@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useCart } from "../../../context/CartContext";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./CartDrawer.css";
 
 const CartDrawer = ({ isOpen, toggleCart }) => {
@@ -9,8 +10,30 @@ const CartDrawer = ({ isOpen, toggleCart }) => {
     useCart();
   const navigate = useNavigate();
 
-  // Mock login status (replace with your actual logic)
-  const isLoggedIn = false; // Replace with login state from your auth context or logic
+  // State to track login status
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check login status when the component mounts
+    const checkLoginStatus = async () => {
+      try {
+        const userId = localStorage.getItem("userId"); // Assuming userId is stored in localStorage
+        if (userId) {
+          const response = await axios.get(
+            `http://localhost:8080/users/${userId}`
+          );
+          if (response.status === 200 && response.data) {
+            setIsLoggedIn(true); // User is authenticated
+          }
+        }
+      } catch (error) {
+        console.error("Error checking login status:", error);
+        setIsLoggedIn(false); // User is not authenticated
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
 
   const calculateSubtotal = () => {
     return cart.items.reduce(
