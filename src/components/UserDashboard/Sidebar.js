@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
 import {
   FaCalendarAlt,
@@ -8,8 +8,30 @@ import {
   FaShoppingBag,
   FaCog,
 } from "react-icons/fa";
+import axiosInstance from "../../services/axiosInstance";
 
 const Sidebar = ({ activeTab, setActiveTab }) => {
+  const [userData, setUserData] = useState({ name: "", phoneNumber: "" });
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Fetch userId from localStorage
+        const response = await axiosInstance.get(`/users/7`, {
+          withCredentials: true, // Ensure cookies are included
+        });
+        setUserData({
+          name: response.data.name || "User Name",
+          phoneNumber: response.data.phoneNumber || "+91 XXXXXXXXXX",
+        });
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <div className="sidebar">
       {/* Profile Section */}
@@ -20,8 +42,8 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
           className="profile-picture"
         />
         <div className="profile-info">
-          <h3>Danish Dilshad</h3>
-          <p>+91 7428283981</p>
+          <h3>{userData.name}</h3>
+          <p>{userData.phoneNumber}</p>
         </div>
         <FaCog className="settings-icon" />
       </div>
