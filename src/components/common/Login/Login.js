@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../services/axiosInstance";
-import { useAuth } from "../../../context/AuthContext";
+import { useDispatch } from "react-redux";
+import { fetchUserData } from "../../../redux/userSlice"; 
 import "./Login.css";
 
 const Login = () => {
@@ -9,7 +10,7 @@ const Login = () => {
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState(1);
   const [errorMessage, setErrorMessage] = useState("");
-  const { login } = useAuth(); // Use login function from AuthContext
+  //const { login } = useAuth(); // Use login function from AuthContext
   const navigate = useNavigate();
 
   const sendOtp = async () => {
@@ -31,7 +32,7 @@ const Login = () => {
       );
     }
   };
-
+  const dispatch = useDispatch();
   const verifyOtp = async () => {
     try {
       const response = await axiosInstance.post("/api/auth/verify-otp", {
@@ -42,7 +43,7 @@ const Login = () => {
       console.log("Verify OTP response:", response.data); // Debug the response
 
       if (response.status === 200) {
-        login(); // Update the global authentication state
+        dispatch(fetchUserData()); 
         navigate("/account"); // Redirect to the account page
       } else {
         setErrorMessage("Login failed. Please try again.");

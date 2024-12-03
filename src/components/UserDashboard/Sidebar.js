@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Sidebar.css";
 import {
   FaCalendarAlt,
@@ -8,29 +8,21 @@ import {
   FaShoppingBag,
   FaCog,
 } from "react-icons/fa";
-import axiosInstance from "../../services/axiosInstance";
+import { useSelector } from "react-redux";
 
 const Sidebar = ({ activeTab, setActiveTab }) => {
-  const [userData, setUserData] = useState({ name: "", phoneNumber: "" });
+  // Access user state from Redux
+  const { user, loading, error } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        // Fetch userId from localStorage
-        const response = await axiosInstance.get(`/users/7`, {
-          withCredentials: true, // Ensure cookies are included
-        });
-        setUserData({
-          name: response.data.name || "User Name",
-          phoneNumber: response.data.phoneNumber || "+91 XXXXXXXXXX",
-        });
-      } catch (error) {
-        console.error("Failed to fetch user data:", error);
-      }
-    };
+  // Render loading state
+  if (loading) {
+    return <div className="sidebar">Loading user data...</div>;
+  }
 
-    fetchUserData();
-  }, []);
+  // Render error state
+  if (error) {
+    return <div className="sidebar">Error: {error}</div>;
+  }
 
   return (
     <div className="sidebar">
@@ -42,8 +34,8 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
           className="profile-picture"
         />
         <div className="profile-info">
-          <h3>{userData.name}</h3>
-          <p>{userData.phoneNumber}</p>
+          <h3>{user?.name || "User Name"}</h3>
+          <p>{user?.phoneNumber || "+91 XXXXXXXXXX"}</p>
         </div>
         <FaCog className="settings-icon" />
       </div>
