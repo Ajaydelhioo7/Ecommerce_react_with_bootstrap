@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useCart } from "../../../context/CartContext";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/AuthContext"; // Use AuthContext for login check
+import axiosInstance from "../../../services/axiosInstance";
 import "./CartDrawer.css";
 
 const CartDrawer = ({ isOpen, toggleCart }) => {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart } =
     useCart();
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth(); // Access global authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Check login status when the component mounts
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const response = await axiosInstance.get("/users/currentUser", {
+          withCredentials: true,
+        });
+        if (response.status === 200) {
+          setIsAuthenticated(true); // User is logged in
+        }
+      } catch (error) {
+        setIsAuthenticated(false); // User is not logged in
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
 
   const calculateSubtotal = () => {
     return cart.items.reduce(
@@ -18,19 +36,18 @@ const CartDrawer = ({ isOpen, toggleCart }) => {
     );
   };
 
+  const handleCheckout = () => {
+    toggleCart(); // Close the drawer
+    if (isAuthenticated) {
+      navigate("/checkout"); // Redirect to checkout if logged in
+    } else {
+      navigate("/login"); // Redirect to login if not logged in
+    }
+  };
+
   const handleViewCart = () => {
     toggleCart(); // Close the drawer
     navigate("/cart"); // Navigate to Cart page
-  };
-
-  const handleCheckout = () => {
-    if (!isAuthenticated) {
-      toggleCart(); // Close the drawer
-      navigate("/login"); // Redirect to Login page
-      return;
-    }
-    toggleCart(); // Close the drawer
-    navigate("/checkout"); // Navigate to Checkout page
   };
 
   return (

@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../services/axiosInstance";
 import { useAuth } from "../../../context/AuthContext";
 import "./Login.css";
 
 const Login = () => {
-  const [phoneNumber, setPhoneNumber] = useState("+91"); // Default prefix
+  const [phoneNumber, setPhoneNumber] = useState("+91");
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState(1);
   const [errorMessage, setErrorMessage] = useState("");
-  const { login } = useAuth(); // Access login function from context
+  const { authData, login } = useAuth(); // Access auth context
   const navigate = useNavigate();
+
+  // Redirect to account page if already logged in
+  useEffect(() => {
+    if (authData) {
+      navigate("/account");
+    }
+  }, [authData, navigate]);
 
   const sendOtp = async () => {
     try {
@@ -18,9 +25,8 @@ const Login = () => {
         headers: { "Content-Type": "text/plain" },
       });
       alert("OTP sent!");
-      setStep(2); // Move to OTP verification step
+      setStep(2);
     } catch (error) {
-      console.error("Error sending OTP:", error.response || error.message);
       setErrorMessage("Failed to send OTP. Please try again.");
     }
   };
@@ -31,37 +37,19 @@ const Login = () => {
         "/api/auth/verify-otp",
         { phoneNumber, otp },
         {
-          withCredentials: true, // Include credentials for cookie handling
+          withCredentials: true,
         }
       );
 
-      // Fetch user session after successful OTP verification
-      const userResponse = await axiosInstance.get("/users/currentUser", {
+      const response = await axiosInstance.get("/users/currentUser", {
         withCredentials: true,
       });
 
-      // Update context with user data
-      login(userResponse.data);
-
-      // Redirect to the account page
-      navigate("/account");
+      login(response.data); // Store user data in context
+      navigate("/account"); // Redirect to account page
     } catch (error) {
-      console.error("Error verifying OTP:", error.response || error.message);
       setErrorMessage("Failed to verify OTP. Please try again.");
     }
-  };
-
-  const handlePhoneNumberChange = (e) => {
-    const input = e.target.value;
-
-    // Ensure the value always starts with "+91"
-    if (!input.startsWith("+91")) {
-      return;
-    }
-
-    // Allow only numeric characters after "+91"
-    const sanitizedInput = input.replace(/[^\d+]/g, "");
-    setPhoneNumber(sanitizedInput);
   };
 
   return (
@@ -81,7 +69,7 @@ const Login = () => {
                 type="text"
                 placeholder="Enter Mobile Number"
                 value={phoneNumber}
-                onChange={handlePhoneNumberChange}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 required
               />
               <button type="submit" className="btn btn-warning">
