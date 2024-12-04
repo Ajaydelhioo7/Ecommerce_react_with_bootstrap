@@ -11,16 +11,13 @@ import {
 import { useSelector } from "react-redux";
 
 const Sidebar = ({ activeTab, setActiveTab }) => {
-  // Access user state from Redux
-  const { user, loading, error } = useSelector((state) => state.user);
+  const { data: user, status, error } = useSelector((state) => state.user);
 
-  // Render loading state
-  if (loading) {
+  if (status === "loading") {
     return <div className="sidebar">Loading user data...</div>;
   }
 
-  // Render error state
-  if (error) {
+  if (status === "failed") {
     return <div className="sidebar">Error: {error}</div>;
   }
 
@@ -34,7 +31,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
           className="profile-picture"
         />
         <div className="profile-info">
-          <h3>{user?.name || "User Name"}</h3>
+          <h3>{user?.name || "Guest"}</h3>
           <p>{user?.phoneNumber || "+91 XXXXXXXXXX"}</p>
         </div>
         <FaCog className="settings-icon" />
