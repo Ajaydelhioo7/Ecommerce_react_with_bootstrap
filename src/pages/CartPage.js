@@ -2,7 +2,7 @@ import React from "react";
 import { useCart } from "../context/CartContext";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "./CartPage.css";
+import "./css/CartPage.css";
 
 const CartPage = () => {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart } =

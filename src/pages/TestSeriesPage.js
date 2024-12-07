@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Tabs, Tab } from "react-bootstrap";
 import TestSeriesCard from "../components/TestSeriesCard/TestSeriesCard";
 import TestSeriesFilters from "../components/Filters/TestSeriesFilters";
-import "./TestSeriesPage.css";
+import "./css/TestSeriesPage.css";
 
 // Updated test series data with `testSeriesType` added
 const testSeriesData = [

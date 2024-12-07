@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Tabs, Tab } from "react-bootstrap";
 import CourseCard from "../components/CourseCard/CourseCard";
 import CourseFilters from "../components/Filters/CourseFilters";
-import "./CoursesPage.css";
+import "./css/CoursesPage.css";
 
 // Updated course data with courseType, subject, exam, and category added
 const courseData = [

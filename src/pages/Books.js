@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import BookCard from "../components/BookCard/BookCard";
 import Filters from "../components/Filters/Filters";
-import "./Books.css";
+import "./css/Books.css";
 //import axios from "axios";
 import axiosInstance from "../services/axiosInstance";
 
@@ -28,7 +28,7 @@ const Books = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axiosInstance.get("/products",{
+        const response = await axiosInstance.get("/products", {
           withCredentials: true,
         });
         const transformedBooks = response.data.map((item) => ({
