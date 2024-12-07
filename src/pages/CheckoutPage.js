@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import logo from "../assets/images/99notes.webp";
-import "./CheckoutPage.css";
+import "./css/CheckoutPage.css";
 
 const CheckoutPage = () => {
   return (

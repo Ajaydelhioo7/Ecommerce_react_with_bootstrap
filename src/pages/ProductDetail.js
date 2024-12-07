@@ -11,7 +11,7 @@ import {
   Tab,
 } from "react-bootstrap";
 import { useCart } from "../context/CartContext";
-import "./ProductDetail.css";
+import "./css/ProductDetail.css";
 
 const ProductDetail = () => {
   const { state } = useLocation();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../services/axiosInstance";
-import "./Account.css";
+import "./css/Account.css";
 
 const Account = () => {
   const [userData, setUserData] = useState(null);
