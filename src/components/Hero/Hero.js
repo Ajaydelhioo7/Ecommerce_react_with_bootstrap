@@ -14,7 +14,7 @@ const Hero = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
-            <Form className="hero-search">
+            <Form className="hero-search ">
               <Form.Control
                 type="text"
                 placeholder="Search for ISBN number"
