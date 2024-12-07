@@ -1,24 +1,30 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Homepage from "../pages/Homepage";
 import ProductDetail from "../pages/ProductDetail";
 import Books from "../pages/Books";
 import Account from "../pages/Account";
 import CoursesPage from "../pages/CoursesPage";
 import CartPage from "../pages/CartPage";
-import CheckoutPage from "../pages/CheckoutPage"; // Import CheckoutPage
+import CheckoutPage from "../pages/CheckoutPage";
 import FooterOne from "../components/common/Footer/FooterOne";
 import FooterTwo from "../components/common/Footer/FooterTwo";
 import TestSeriesPage from "../pages/TestSeriesPage";
 import Login from "../components/common/Login/Login";
 import Register from "../components/common/Register/Register";
-import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute"; // Import ProtectedRoute
+import { useAuth } from "../context/AuthContext";
 
 const AppRoutes = () => {
   const location = useLocation();
+  const { authData, loading } = useAuth();
 
   // Determine which footer to display based on the route
   const isFooterOne = !["/checkout", "/cart"].includes(location.pathname);
+
+  if (loading) {
+    // Show a loader while auth status is being determined
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -30,24 +36,21 @@ const AppRoutes = () => {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/test-series" element={<TestSeriesPage />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={authData ? <Navigate to="/account" replace /> : <Login />}
+        />
         <Route path="/register" element={<Register />} />
 
         {/* Protected Routes */}
         <Route
           path="/account"
-          element={
-            <ProtectedRoute>
-              <Account />
-            </ProtectedRoute>
-          }
+          element={authData ? <Account /> : <Navigate to="/login" replace />}
         />
         <Route
           path="/checkout"
           element={
-            <ProtectedRoute>
-              <CheckoutPage />
-            </ProtectedRoute>
+            authData ? <CheckoutPage /> : <Navigate to="/login" replace />
           }
         />
       </Routes>
