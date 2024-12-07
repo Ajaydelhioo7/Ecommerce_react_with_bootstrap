@@ -61,12 +61,17 @@
 .nav-links {
   display: flex;
   gap: 20px;
+  color: #3d3d3d;
 }
 
 .nav-links a {
   text-decoration: none;
   color: #333;
-  font-size: 1rem;
+  font-family: "Kaisei Tokumin";
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 /* User action icons */

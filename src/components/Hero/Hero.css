@@ -6,21 +6,31 @@
 }
 
 .hero-left h1 {
-  font-size: 2.5rem;
+  color: #3d3d3d;
+  font-family: "Kaisei Tokumin";
+  font-size: 60px;
+  font-style: normal;
   font-weight: 700;
-  margin-bottom: 20px;
-  line-height: 1.2;
+  line-height: normal;
 }
 
 .hero-left p {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 30px;
+  color: #3d3d3d;
+  font-family: "Kaisei Tokumin";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: 20px;
 }
 
 .hero-search {
   display: flex;
   gap: 10px;
+  width: 472px;
+  height: 67px;
+  flex-shrink: 0;
+  margin-top: 20px;
 }
 
 .search-input {
@@ -30,6 +40,8 @@
 .search-button {
   padding: 10px 20px;
   font-weight: 500;
+  width: 160px;
+  height: 67px;
 }
 
 .hero-carousel .carousel-item img {
@@ -38,4 +50,7 @@
 .imgcar {
   height: 300px;
   width: 100px;
+}
+.carousel-item img {
+  height: 500px;
 }
