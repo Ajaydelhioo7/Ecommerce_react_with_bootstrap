@@ -1,71 +1,79 @@
 import axios from "axios";
 
 // Creating common Axios Instance
-
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8080",
-  timeout: 10000,
+  baseURL: "http://localhost:8080", // Base URL for API
+  timeout: 10000, // Timeout for requests
+  withCredentials: true, // Include cookies for session handling
 });
+
+// Flag to track if redirection has occurred
+let hasRedirected = false;
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    return config;
+    return config; // Allow request to proceed
   },
   (error) => {
     console.error("Request error occurred:", error.message);
-    return Promise.reject(error); // I am Rejecting the promise so the error can propagate
+    return Promise.reject(error); // Propagate the error
   }
 );
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    return response;
+    return response; // Return successful response
   },
   (error) => {
     if (error.response) {
       const status = error.response.status;
 
-      if (status === 401) {
-        // Unauthorized: Token might be expired or invalid
-        console.error("Unauthorized access. Redirecting to login...");
-        localStorage.removeItem("jwtToken");
-        window.location.href = "/login";
-      } else if (status === 403) {
-        // Forbidden: User does not have permission for this action
-        console.error(
-          "Access forbidden. You do not have the required permissions."
-        );
-        alert("You are not authorized to perform this action.");
+      // Handle authentication errors only for specific routes
+      const authRequiredRoutes = [
+        "/users/currentUser",
+        "/checkout",
+        "/account",
+      ];
+      const isAuthRequired = authRequiredRoutes.some((route) =>
+        error.config.url.includes(route)
+      );
+
+      if (isAuthRequired && !hasRedirected) {
+        if (status === 401) {
+          // Unauthorized: Redirect to login
+          console.error("Unauthorized access. Redirecting to login...");
+          hasRedirected = true;
+          window.location.href = "/login"; // Redirect to login page
+        } else if (status === 403) {
+          // Forbidden: Insufficient permissions
+          console.error(
+            "Access forbidden. You do not have the required permissions."
+          );
+        }
       } else if (status >= 400 && status < 500) {
-        // Other Client Errors (400–499)
+        // Log client-side errors for debugging
         console.error(
           `Client error: ${status} - ${
             error.response.data.message || "Unknown error"
           }`
         );
-        alert(error.response.data.message || "A client-side error occurred.");
       } else if (status >= 500) {
-        // Server Errors
+        // Log server-side errors for debugging
         console.error(
           `Server error: ${status} - ${
             error.response.data.message || "Unknown error"
           }`
         );
-        alert("A server error occurred. Please try again later.");
       }
     } else if (error.request) {
-      console.error(
-        "No response received from the server. Please check your network."
-      );
-      alert(
-        "A network error occurred. Please check your connection and try again."
-      );
+      // No response from the server
+      console.error("No response received from the server.");
     } else {
+      // Unexpected error
       console.error("Unexpected error:", error.message);
-      alert("An unexpected error occurred. Please try again.");
     }
 
-    return Promise.reject(error);
+    return Promise.reject(error); // Propagate the error
   }
 );
 
