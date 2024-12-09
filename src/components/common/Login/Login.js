@@ -9,8 +9,8 @@ const Login = () => {
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState(1);
   const [errorMessage, setErrorMessage] = useState("");
-  const [timer, setTimer] = useState(60); // Timer state for resend OTP
-  const { authData, login } = useAuth(); // Access auth context
+  const [timer, setTimer] = useState(60); // Timer for resend OTP
+  const { authData, login } = useAuth(); // Access global authentication context
   const navigate = useNavigate();
 
   // Redirect to account page if already logged in
@@ -26,7 +26,7 @@ const Login = () => {
       const interval = setInterval(() => {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
-      return () => clearInterval(interval); // Cleanup interval
+      return () => clearInterval(interval); // Cleanup timer
     }
   }, [step, timer]);
 
@@ -37,7 +37,7 @@ const Login = () => {
       });
       alert("OTP sent!");
       setStep(2);
-      setTimer(60); // Reset the timer
+      setTimer(60); // Reset timer
     } catch (error) {
       setErrorMessage("Failed to send OTP. Please try again.");
     }
@@ -45,6 +45,7 @@ const Login = () => {
 
   const verifyOtp = async () => {
     try {
+      // Verify OTP with backend
       await axiosInstance.post(
         "/api/auth/verify-otp",
         { phoneNumber, otp },
@@ -53,11 +54,12 @@ const Login = () => {
         }
       );
 
+      // Fetch current user details and store them globally
       const response = await axiosInstance.get("/users/currentUser", {
         withCredentials: true,
       });
 
-      login(response.data); // Store user data in context
+      login(response.data); // Store session data in AuthContext
       navigate("/account"); // Redirect to account page
     } catch (error) {
       setErrorMessage("Failed to verify OTP. Please try again.");
@@ -133,7 +135,7 @@ const Login = () => {
               number: <strong>{phoneNumber.slice(3)}</strong>{" "}
               <span
                 className="change-link"
-                onClick={() => setStep(1)} // Go back to phone number input
+                onClick={() => setStep(1)} // Return to phone input step
               >
                 Change
               </span>
@@ -162,7 +164,7 @@ const Login = () => {
                 ) : (
                   <span
                     className="resend-link"
-                    onClick={sendOtp} // Resend OTP when clicked
+                    onClick={sendOtp} // Allow resend OTP
                   >
                     Resend OTP
                   </span>

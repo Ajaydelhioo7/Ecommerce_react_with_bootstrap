@@ -1,80 +1,62 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../services/axiosInstance";
+import { useAuth } from "../context/AuthContext";
 import "./css/Account.css";
 
 const Account = () => {
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const { authData, logout, loading } = useAuth(); // Use AuthContext
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axiosInstance.get("/users/currentUser", {
-          withCredentials: true,
-        });
-        setUserData(response.data);
-      } catch (err) {
-        setError("Unable to load user details. Please try again later.");
-        console.error("Error fetching user data:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserDetails();
-  }, []);
-
-  const handleLogout = () => {
-    // Delete the jwt cookie
-    document.cookie =
-      "jwt=; Path=/; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT;";
-    navigate("/login"); // Redirect to login page
-  };
-
+  // If user data is still loading, show a loader
   if (loading) {
     return <div className="account-container">Loading user details...</div>;
   }
 
-  if (error) {
-    return <div className="account-container error-message">{error}</div>;
+  // If the user is not logged in (authData is null), redirect to login
+  if (!authData) {
+    navigate("/login");
+    return null;
   }
+
+  // Handle logout
+  const handleLogout = async () => {
+    await logout(); // Call the logout function from AuthContext
+    navigate("/login"); // Redirect to login page
+  };
 
   return (
     <div className="account-container">
       <h2>My Account</h2>
       <div className="account-details">
         <div className="detail-item">
-          <strong>ID:</strong> {userData.id || "N/A"}
+          <strong>ID:</strong> {authData.id || "N/A"}
         </div>
         <div className="detail-item">
-          <strong>Name:</strong> {userData.name || "Not Provided"}
+          <strong>Name:</strong> {authData.name || "Not Provided"}
         </div>
         <div className="detail-item">
-          <strong>Email:</strong> {userData.email || "Not Provided"}
+          <strong>Email:</strong> {authData.email || "Not Provided"}
         </div>
         <div className="detail-item">
           <strong>Phone Number:</strong>{" "}
-          {userData.phoneNumber || "Not Provided"}
+          {authData.phoneNumber || "Not Provided"}
         </div>
         <div className="detail-item">
-          <strong>Address:</strong> {userData.address || "Not Provided"}
+          <strong>Address:</strong> {authData.address || "Not Provided"}
         </div>
         <div className="detail-item">
-          <strong>Role:</strong> {userData.role || "N/A"}
+          <strong>Role:</strong> {authData.role || "N/A"}
         </div>
         <div className="detail-item">
-          <strong>Username:</strong> {userData.username || "Not Provided"}
+          <strong>Username:</strong> {authData.username || "Not Provided"}
         </div>
         <div className="detail-item">
           <strong>Account Created:</strong>{" "}
-          {new Date(userData.createdAt).toLocaleString()}
+          {new Date(authData.createdAt).toLocaleString()}
         </div>
         <div className="detail-item">
           <strong>Last Updated:</strong>{" "}
-          {new Date(userData.updatedAt).toLocaleString()}
+          {new Date(authData.updatedAt).toLocaleString()}
         </div>
       </div>
       <div className="logout-container">
